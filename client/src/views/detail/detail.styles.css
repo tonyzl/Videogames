@@ -1,0 +1,24 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color:cornflowerblue;
+}
+
+.grid-img{
+  display: flex;
+  flex-direction: row;
+}
+.img-container{
+    width: 250px;
+    height: 160px;
+  }
+
+  .platform-list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+

@@ -1,0 +1,17 @@
+.search-box {
+
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 880px;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px;
+  border: none;
+  padding: 10px;
+
+  line-height: 30px;
+  background-color:cornflowerblue;
+}
+
+
