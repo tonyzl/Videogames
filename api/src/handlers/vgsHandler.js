@@ -41,11 +41,11 @@ const {
   };
   
   const createVgHandler = async (req, res) => {
-    const {name, description, platforms, image, released, rating} = req.body;
+    const {name, description, platforms, image, released, rating, genres} = req.body;
   
     console.log(req.body);
     try {
-      const response = await createVgDB(name, description, platforms, image, released, rating);
+      const response = await createVgDB(name, description, platforms, image, released, rating, genres);
       res.status(200).json(response);
     } catch (error) {
       res.status(400).json({error: error.message});

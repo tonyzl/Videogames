@@ -37,7 +37,7 @@ function Home() {
   function handleFilteredByGenre(event) {
     event.preventDefault();
     dispatch(filteredByGenre(event.target.value));
-    setBooleano(!booleano); // Se actualiza el componente!
+
   }
 
   function handleFilteredById(event) {

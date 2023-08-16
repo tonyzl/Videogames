@@ -1,22 +1,23 @@
 .card-list {
   width: 97vw;
-  margin: 20px 1px;
+  margin: 70px 1px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 70px;
 }
 
 .pagination{
 
   display: flex;
   flex-direction: row;
-  margin-left: 680px;
+  margin: 0px 500px;
+  justify-content: space-around;
   align-items: center;
   align-content: center;
+
 }
 
 .text{
-background-color: beige;
-
+background-color: cornflowerblue;
 
 }

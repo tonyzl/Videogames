@@ -1,54 +1,91 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import "./create.styles.css";
 import {Link} from "react-router-dom";
-import {getVgs} from "../../redux/actions"
+import {newVg} from "../../redux/actions"
+import { useDispatch } from "react-redux";
+import axios from "axios"
+//import { newVg } from '../../redux/actions/index'; // Importa la acción correspondien
 
 function Create() {
+
+  const dispatch=useDispatch()
+ 
+  const [genres, setGenres] = useState([]);
+
+  //const allGenres = useSelector((state) => state.genres);
+
+
+  
+  useEffect(() => {
+    axios.get("http://localhost:3001/genres/")
+      .then((response) => {
+        if (response.data) {
+          // algo
+          setGenres(response.data);
+          console.log(genres);
+        } else {
+          console.log("Zero regs");
+        }
+      })
+      .catch((err) => console.log(err));
+
+    // desmontaje
+    return () => {
+      // ejecutar cuando se desmonte
+      console.log("");
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  });
+
   const [input, setInput] = useState({
     name: "",
     description: "",
-
+    platforms: "",
+    image: "",
+    released: "",
+    rating: "",
+    genres: "",
 
   });
 
   const [error, setError] = useState({
     name: "requerido",
-    rating: "",
+    description: "requerido",
+    platforms: "requerido",
+    image: "requerido",
+    released: "requerido",
+    rating: "requerido",
+    genres: "requerido",
   });
 
-
-  //(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?  validar una URL
-  const validate = (input) => {
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
-      setError({...error, name: "Formato invalido"});
-      return;
-    }
-    setError({...error, name: ""});
-  };
-
-  function handleChange(e) {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [name]: value
     });
-
-    validate({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  }
+  };
 
   //debo crar la action correspondiente 
-  function handleSubmit(e) {
-    e.preventDefault();
-    //dispatch(getVgs()); // no es getVgs
+  const handleSubmit = (event) => {
+    event.preventDefault();
+   
 
-    
+   // Validación de campos
+   if (!input.name || !input.description || !input.platforms  || !input.image || !input.released|| !input.rating || !input.genres) {
+    // Mostrar mensaje de error
+    alert('Por favor completa todos los campos obligatorios.');
+    return;
   }
+
+
+  // Creación del videojuego
+  dispatch(newVg(input)); // Llama a la acción para crear el videojuego
+};
 
   return (
     <div className="container">
-      <form onSubmit={""}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label> Nombre: </label>
           <input name="name" type="text" value={input.value} onChange={handleChange} />
@@ -78,7 +115,7 @@ function Create() {
           <label> Rating: </label>
           <input name="rating" type="number" min={1} max={5} value={input.value} onChange={handleChange} />
         </div>
-        {error.genres ? null : <Link to={`/home`}><button type="submit">Sumbit</button></Link>}
+              <button type="submit">Sumbit</button>
       </form>
     </div>
   );

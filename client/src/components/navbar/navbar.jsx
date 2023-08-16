@@ -1,7 +1,59 @@
 import "./navbar.styles.css";
 import {Link} from "react-router-dom";
+import axios from "axios"
 
-function Navbar({handleChange, handleSubmit, handleOrder, handleFilteredById, handleFilteredByGenre}) {
+import { useSelector,useDispatch } from "react-redux";
+import { getGenres,filteredByGenre } from "../../redux/actions";
+import { useEffect, useState } from "react";
+
+function Navbar({handleChange, handleSubmit, handleOrder, handleFilteredById}) {
+
+  const dispatch=useDispatch()
+ 
+  const [genres, setGenres] = useState([]);
+  const [booleano, setBooleano] = useState(false);
+
+
+  
+  useEffect(() => {
+    axios.get("http://localhost:3001/genres/")
+      .then((response) => {
+        if (response.data) {
+          // algo
+          setGenres(response.data);
+          console.log(genres);
+        } else {
+          console.log("Zero regs");
+        }
+      })
+      .catch((err) => console.log(err));
+
+    // desmontaje
+    return () => {
+      // ejecutar cuando se desmonte
+      console.log("");
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+
+
+  function handleFilteredByGenre(event) {
+    event.preventDefault();
+    if(event.target.value){
+      dispatch(filteredByGenre(event.target.value))
+    }
+    setBooleano(!booleano); // Se actualiza el componente!
+
+  }
+
+  /*
+  useEffect(() => {
+    dispatch(getGenres());
+  }, [dispatch]);*/
+
+
+  console.log("estoy en el navbar");
+
 
 
 
@@ -19,26 +71,15 @@ function Navbar({handleChange, handleSubmit, handleOrder, handleFilteredById, ha
 
         <p>Genre: </p>
         <select onChange={handleFilteredByGenre}>
-          <option value=""></option>
-          <option value="A">Racing</option>
-          <option value="B">Shooter</option>
-          <option value="C">Adventure</option>
-          <option value="D">Action</option>
-          <option value="E">RPG</option>
-          <option value="F">Fighting</option>
-          <option value="G">Puzzle</option>
-          <option value="H">Strategy</option>
-          <option value="I">Arcade</option>
-          <option value="J">Simulation</option>
-          <option value="K">Sports</option>
-          <option value="L">Card</option>
-          <option value="M">Family</option>
-          <option value="N">Board Games</option>
-          <option value="O">Educational</option>
-          <option value="P">Casual</option>
-          <option value="Q">Indie</option>
-          <option value="R">Massively Multiplayer</option>
-          <option value="S">Platformer</option>
+          <option value="default"></option>
+
+          {
+            genres?
+            genres.map((genre)=>{
+            return <option value={genre.name}>{genre.name}</option>
+            }):""
+          }
+
         </select>
 
         <p>Origen: </p>

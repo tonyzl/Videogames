@@ -1,16 +1,33 @@
-import {GET_VGS, GET_BY_NAME,GET_DETAIL,ORDER,FILTERBYORIGIN,FILTERBYGENRE} from "../actions";
+import {NEW_VG,GET_VGS,GET_GENRES, GET_BY_NAME,GET_DETAIL,ORDER,FILTERBYORIGIN,FILTERBYGENRE} from "../actions";
 
 let initialState = {allVgs: [], vgsCopy: [], genres: [], detail:[]};
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
 
+
+
+
     case GET_VGS:
       return {
         ...state,
         allVgs: action.payload,
-        vgsCopy: action.payload,
+        //vgsCopy: action.payload,
       };
+
+      case GET_GENRES:
+        return {
+          ...state,
+          genres: action.payload,
+          //vgsCopy: action.payload,
+        };
+
+        case NEW_VG:
+          return {
+            ...state,
+            allVgs: [...state.allVgs, action.payload], // Agrega el nuevo videojuego al estado
+          };    
+
     case GET_BY_NAME:
       return {
         ...state,
@@ -51,9 +68,6 @@ function rootReducer(state = initialState, action) {
               return 0; // Si son iguales, no los muevo de posición.
             }
           });
-    
-
-
           return {
             ...state,
             allVgs: copy,
@@ -85,29 +99,29 @@ function rootReducer(state = initialState, action) {
 
 
             case FILTERBYGENRE:
-
-            let filterGenre=[]
-
-            switch (action.payload) {
-              case 'D':
+            console.log(action.payload);
+            let filtergames=[]
+            const all=state.allVgs
+            console.log("entre al filtro");
+            //console.log(todoslosjuegos);
+            filtergames=all.filter(vg=>{
                 let isIn=false
-                let filterG=state.allVgs.filter(element=>{
-                    element.genres.forEach(genre => {
-                      if(genre.name==="Action"){
-                        isIn=true
-                        return true
-                      }
-                    });
-                    if(isIn){
-                      filterGenre.push(element)
-                    }
+                vg.genres.filter(genre=>{
+                  if(genre.name===action.payload){
+                    isIn=true
+                  }
                 })
-                break;
+            })
+            console.log("ya pase por el filtro",filtergames);
+
+           
+            return{
+
+              ...state,
+              allVgs:action.payload==="default"?state.allVgs:filtergames
+
             }
-              return {
-                ...state,
-                allVgs: filterGenre,
-              }; 
+
 
     default:
       return {

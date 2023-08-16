@@ -29,39 +29,12 @@ function Detail() {
     // desmontaje
     return () => {
       // ejecutar cuando se desmonte
-      console.log("Me desmonto, adios!");
+      console.log("");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /* 
-  
-        <h2>{detail.name}</h2>
-      <img className="img-container" src={detail.background_image} alt=''/>
-      <p><strong>DESCRIPTION</strong></p>
-      <p>{detail.description}</p>
-      <p><strong>PLATFORMS</strong></p>
-      
-      <div>
-        {
-          detail.platforms.map((platform)=>{
-            return <p>{platform.platform.name}</p>
-          })
-        }
-      </div>
 
-      <p>Lanzamiento: {detail.released}</p>
-      <p>Rating: {detail.rating}</p>
-      <p><strong>GENRES:</strong></p>
-      <div>
-        {
-          detail.genres.map((genre)=>{
-            return <p>{genre.name}</p>
-          })
-        }
-      </div>
-  
-  */
 
   return (
     <div className="container">
@@ -70,28 +43,27 @@ function Detail() {
  
       <img className="img-container" src={detail.background_image} alt=''/>
 
-      <p><strong>PLATFORMS</strong></p>
-      <p className="platform-list">
+
+      <strong><p className="platform-list">
         {
           detail.platforms?
           detail.platforms.map((platform)=>{
             return <p>{platform.platform.name}</p>
           }):""
         }
-      </p>
+      </p></strong>
       
-      <p>Date Released: {detail.released}</p>
-      <p>Rating: {detail.rating}</p>
 
-      <p><strong>GENRES:</strong></p>
-      <p className="platform-list">
+
+
+      <strong><p className="platform-list">
         {
           detail.genres?
           detail.genres.map((genre)=>{
             return <p>{genre.name}</p>
           }):""
         }
-      </p>
+      </p></strong>
 
       <p><strong>DESCRIPTION</strong></p>
       <p className="text-desc">{detail.description?.split("<p>")
@@ -99,6 +71,10 @@ function Detail() {
       .split(".</p>")
 
       }</p>
+
+      <strong><p>Date Released: {detail.released}</p></strong>
+      <strong><p>Rating: {detail.rating}</p></strong>
+      <strong><p>Identificador: {id}</p></strong>
 
     </div>
   );

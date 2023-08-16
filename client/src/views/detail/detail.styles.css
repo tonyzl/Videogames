@@ -2,7 +2,8 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color:cornflowerblue;
+  background-color: blue;
+
 }
 
 .grid-img{
@@ -19,6 +20,6 @@
     display: flex;
     justify-content: space-around;
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color:cornflowerblue;
   }
 

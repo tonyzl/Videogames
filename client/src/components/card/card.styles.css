@@ -2,36 +2,42 @@
   display: flex;
   flex-direction: column;
 
-  border: 1px solid grey;
+  border: 1px solid darkblue;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
   -moz-osx-font-smoothing: grayscale;
   backface-visibility: hidden;
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
 
-  background-color:cornflowerblue;
-  text-decoration: none;
+
+  color: beige;
 }
 
 .card-container:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .card-container a {
   text-decoration: none;
+  color: beige;
 }
 
 .img-container{
-  width: 100px;
-  height: 200px;
+  width: 700px;
+  height: 300px;
 }
 
+.img-container:hover{
+  transform: scale(1.7);
+}
+
+
 .platform-list {
-  list-style-type: none;
+
   display: flex;
   justify-content: space-around;
   padding: 10px;
-  background-color: #f0f0f0;
+  background-color:cornflowerblue;
 }

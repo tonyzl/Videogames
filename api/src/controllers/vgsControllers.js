@@ -8,8 +8,17 @@ const {
 
 const {Videogame, Genre} = require("../db");
 
-const createVgDB = async (name, description, platforms, image, released, rating) => {
-  return await Videogame.create({name, description, platforms, image, released,rating});
+const createVgDB = async (name, description, platforms, image, released, rating, genres) => {
+  //Videogame.add(genres)
+  const vgDb= await Videogame.create({name, description, platforms, image, released,rating})
+  const genreDb = await Genre.findAll({
+    where: { name: genres },
+  });
+
+  vgDb.addGenre(genreDb);
+
+  return vgDb
+
 };
 
 
