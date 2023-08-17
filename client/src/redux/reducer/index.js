@@ -76,20 +76,24 @@ function rootReducer(state = initialState, action) {
           case FILTERBYORIGIN:
 
           let filter=[]
-          if (action.payload === "A") {
-              filter=state.allVgs.filter(element=>{
-                if (element.org==="api"){
-                  return true
-                }
-              })
 
-          } else if (action.payload === "B")  {
+          if (action.payload === "BDD")  {
             filter=state.allVgs.filter(element=>{
               if (!Number(element.id)){
                  return true
               }
             })
           }
+
+
+          if (action.payload === "API") {
+              filter=state.allVgs.filter(element=>{
+                if (element.org==="api"){
+                  return true
+                }
+              })
+
+          } 
       
 
             return {
@@ -99,7 +103,8 @@ function rootReducer(state = initialState, action) {
 
 
             case FILTERBYGENRE:
-            console.log(action.payload);
+
+
             let filtergames=[]
             const all=state.allVgs
             console.log("entre al filtro");
@@ -112,8 +117,6 @@ function rootReducer(state = initialState, action) {
                   }
                 })
             })
-            console.log("ya pase por el filtro",filtergames);
-
            
             return{
 

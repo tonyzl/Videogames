@@ -15,7 +15,7 @@ function Card({name,image,genres,rating,id}) {
           genres?
           genres.map((genre)=>{
             return <p>{genre.name}</p>
-          }):""
+          }):<p>{genres}</p>
         }
         </p>
         <p><strong>Rating:{rating}</strong></p>

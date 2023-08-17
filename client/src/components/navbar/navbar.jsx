@@ -21,7 +21,7 @@ function Navbar({handleChange, handleSubmit, handleOrder, handleFilteredById}) {
         if (response.data) {
           // algo
           setGenres(response.data);
-          console.log(genres);
+          //console.log(genres);
         } else {
           console.log("Zero regs");
         }
@@ -46,16 +46,6 @@ function Navbar({handleChange, handleSubmit, handleOrder, handleFilteredById}) {
 
   }
 
-  /*
-  useEffect(() => {
-    dispatch(getGenres());
-  }, [dispatch]);*/
-
-
-  console.log("estoy en el navbar");
-
-
-
 
   return (
     <div className="search-box">
@@ -74,10 +64,10 @@ function Navbar({handleChange, handleSubmit, handleOrder, handleFilteredById}) {
           <option value="default"></option>
 
           {
-            genres?
-            genres.map((genre)=>{
+            genres&&
+            genres?.map((genre)=>{
             return <option value={genre.name}>{genre.name}</option>
-            }):""
+            })
           }
 
         </select>
@@ -85,8 +75,10 @@ function Navbar({handleChange, handleSubmit, handleOrder, handleFilteredById}) {
         <p>Origen: </p>
         <select onChange={handleFilteredById}>
           <option value=""></option>
-          <option value="A">API</option>
-          <option value="B">LOCAL</option>
+          <option value="API">API</option>
+          <option value="BDD">LOCAL</option>
+          
+
         </select>
 
 

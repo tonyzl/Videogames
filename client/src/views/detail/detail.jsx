@@ -41,15 +41,19 @@ function Detail() {
       {console.log(detail)}
       <h2>{detail.name}</h2>
  
-      <img className="img-container" src={detail.background_image} alt=''/>
+      {
+        Number(id)&&
+        <img className="img-container" src={detail.background_image} alt=''/>||
+        <img className="img-container" src={detail.image} alt=''/>
+      }
 
 
       <strong><p className="platform-list">
         {
-          detail.platforms?
+          detail.platforms&&Number(id)?
           detail.platforms.map((platform)=>{
             return <p>{platform.platform.name}</p>
-          }):""
+          }):<p>{detail.platforms}</p>
         }
       </p></strong>
       
@@ -63,6 +67,8 @@ function Detail() {
             return <p>{genre.name}</p>
           }):""
         }
+
+
       </p></strong>
 
       <p><strong>DESCRIPTION</strong></p>

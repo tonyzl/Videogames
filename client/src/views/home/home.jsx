@@ -43,7 +43,7 @@ function Home() {
   function handleFilteredById(event) {
     event.preventDefault();
     dispatch(filteredById(event.target.value));
-    setBooleano(!booleano); // Se actualiza el componente!
+
   }
 
 

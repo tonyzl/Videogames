@@ -10,48 +10,59 @@ export const ORDER = "ORDER";
 export const FILTERBYORIGIN = "FILTERBYORIGIN";
 export const FILTERBYGENRE= "FILTERBYGENRE";
 
+
+
 export function getVgs() {
   return async function (dispatch) {
-    const response = await axios("http://localhost:3001/videogames/");
-    return dispatch({
-      type: "GET_VGS",
-      payload: response.data,
-    });
+    try {
+      const response = await axios("http://localhost:3001/videogames/");
+      return dispatch({
+        type: "GET_VGS",
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+
   };
 }
 
+
+//Trae todos lo Videogames
 export function getGenres() {
   return async function (dispatch) {
-    const response = await axios("http://localhost:3001/genres/");
-    return dispatch({
-      type: "GET_GENRES",
-      payload: response.data,
-    });
+    try {
+      const response = await axios("http://localhost:3001/genres/");
+      return dispatch({
+        type: "GET_GENRES",
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+
   };
 }
+
+
+//Filtra por nombre
 
 export function getByName(name) {
   return async function (dispatch) {
-    const response = await axios(`http://localhost:3001/videogames/?name=${name}`);
-    return dispatch({
-      type: "GET_BY_NAME",
-      payload: response.data,
-    });
+
+    try {
+      const response = await axios(`http://localhost:3001/videogames/?name=${name}`);
+      return dispatch({
+        type: "GET_BY_NAME",
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+
   };
 }
 
-
-
-
-export function getDetail (id) {
-  return async function (dispatch) {
-    const response = await axios(`http://localhost:3001/videogames/id/${id}`);
-    return dispatch({
-      type: "GET_DETAIL",
-      payload: response.data,
-    });
-  };
-};
 
 
 export function orderVgs(order) {
@@ -67,13 +78,24 @@ export function filteredByGenre(param) {
 
 }
 
+
+//Crea un nuevo Videogame
 export const newVg = (data) => {
   return async function (dispatch) {
-      const response = await axios.post('http://localhost:3001/videogames', data); // Cambia la URL según tu endpoint
-      // Aquí podrías manejar el resultado o mostrar un mensaje de éxito si lo deseas
+
+    try {
+  
+      const response = await axios.post('http://localhost:3001/videogames', data); 
+      
       dispatch({
         type: NEW_VG,
         payload: response.data,
       });
+      alert("Se ha creado un nuevo Videojuego!!!")
+
+    } catch (error) {
+      alert(error.message);
+    }
+
   };
 };
