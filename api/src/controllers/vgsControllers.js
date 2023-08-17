@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios = require("axios");
-const oplike =require
+const oplike =require("sequelize")
 
 const {
     API_KEY, URL
@@ -15,9 +15,18 @@ const createVgDB = async (name, description, platforms, image, released, rating,
     where: { name: genres },
   });
 
-  vgDb.addGenre(genreDb);
+  await vgDb.addGenre(genreDb);
 
-  return vgDb
+
+
+  const result = await Videogame.findByPk(vgDb.id, {
+    include: {
+      model: Genre,
+      attributes: ["id", "name"],
+    },
+  });
+
+  return result
 
 };
 
@@ -39,7 +48,12 @@ const getVgById = async (id, source) => {
 
 
 const getAllVgs = async () => {
-  const vgsDB = await Videogame.findAll();
+  const vgsDB = await Videogame.findAll({
+    include: {
+      model: Genre,
+      attributes: ["id", "name"],
+    },
+  });
 
   const videogames=[]
   let api=`${URL}?key=${API_KEY}`

@@ -47,6 +47,10 @@ function Navbar({handleChange, handleSubmit, handleOrder, handleFilteredById}) {
   }
 
 
+
+
+
+
   return (
     <div className="search-box">
 
@@ -71,6 +75,9 @@ function Navbar({handleChange, handleSubmit, handleOrder, handleFilteredById}) {
           }
 
         </select>
+
+
+
 
         <p>Origen: </p>
         <select onChange={handleFilteredById}>

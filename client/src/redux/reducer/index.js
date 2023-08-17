@@ -98,7 +98,7 @@ function rootReducer(state = initialState, action) {
 
             return {
               ...state,
-              allVgs: filter,
+              allVgs: action.payload==="default"?state.allVgs:filter,
             };  
 
 
@@ -106,22 +106,33 @@ function rootReducer(state = initialState, action) {
 
 
             let filtergames=[]
-            const all=state.allVgs
+            let filtergs=[]
+
             console.log("entre al filtro");
-            //console.log(todoslosjuegos);
-            filtergames=all.filter(vg=>{
-                let isIn=false
-                vg.genres.filter(genre=>{
-                  if(genre.name===action.payload){
-                    isIn=true
-                  }
-                })
-            })
+            console.log(state.allVgs);
+
+            /*
+            
+              case FILTER_SELECT:
+
+
+      if (action.payload=== "Todos") {
+        return { ...state, dogs: state.allDogs };
+      }
+
+      const filterTemperament = state.allDogs.filter((dog) => dog.temperament?.split(", ").includes(action.payload))
+
+
+      return { ...state, dogs: filterTemperament };
+            
+            */
            
+            filtergames=state.allVgs.filter(vg=>vg.genres?.split(',').includes(action.payload))
+            console.log(filtergames);
             return{
 
               ...state,
-              allVgs:action.payload==="default"?state.allVgs:filtergames
+              allVgs:filtergames
 
             }
 
