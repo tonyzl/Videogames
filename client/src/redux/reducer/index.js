@@ -12,7 +12,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allVgs: action.payload,
-        //vgsCopy: action.payload,
+        vgsCopy: action.payload,
       };
 
       case GET_GENRES:
@@ -106,28 +106,27 @@ function rootReducer(state = initialState, action) {
 
 
             let filtergames=[]
-            let filtergs=[]
+            let filtergs=state.allVgs
 
-            console.log("entre al filtro");
-            console.log(state.allVgs);
+           /* console.log("entre al filtro");
+            console.log(state.allVgs);*/
 
-            /*
-            
-              case FILTER_SELECT:
-
-
-      if (action.payload=== "Todos") {
-        return { ...state, dogs: state.allDogs };
-      }
-
-      const filterTemperament = state.allDogs.filter((dog) => dog.temperament?.split(", ").includes(action.payload))
-
-
-      return { ...state, dogs: filterTemperament };
-            
-            */
+            if (action.payload==="default"){
+              return {
+                ...state,
+                allVgs:state.vgsCopy
+              }
+            }
            
-            filtergames=state.allVgs.filter(vg=>vg.genres?.split(',').includes(action.payload))
+            filtergames=state.allVgs.filter(vg=>{
+
+              if(vg.genres){
+                const genre=vg.genres.map(
+                  vg=>vg.name
+                )
+              return genre.includes(action.payload)  
+              }})
+
             console.log(filtergames);
             return{
 

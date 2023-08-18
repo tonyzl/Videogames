@@ -17,8 +17,6 @@ const createVgDB = async (name, description, platforms, image, released, rating,
 
   await vgDb.addGenre(genreDb);
 
-
-
   const result = await Videogame.findByPk(vgDb.id, {
     include: {
       model: Genre,

@@ -7,6 +7,7 @@ import {getByName, getVgs, orderVgs} from "../../redux/actions";
 
 function Cards({allVgs}) {
 
+  console.log(allVgs.length);
 
   const dispatch = useDispatch();
   //const allVgs = useSelector((state) => state.allVgs);
