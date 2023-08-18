@@ -108,7 +108,12 @@ const getVgByName = async (name) => {
 
   const vgFiltered = videogames.filter((vg) =>vg.name.toLowerCase().includes(name.toLowerCase()));
 
-  const vgDb = await Videogame.findAll({where: {name: name}});
+  const vgDb = await Videogame.findAll({where: {name: name}, include: {
+    model: Genre,
+    attributes: ["id", "name"],
+  },
+
+});
 
   return [ ...vgDb,...vgFiltered];
 };
