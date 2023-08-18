@@ -5,6 +5,8 @@ import "./cards.styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import {getByName, getVgs, orderVgs} from "../../redux/actions";
 
+import mario from '../../assets/img/mario2.webp'
+
 function Cards({allVgs}) {
 
   console.log(allVgs.length);
@@ -61,6 +63,14 @@ useEffect(() => {
                         <button  onClick={nextPage}>NEXT</button>
             </div>
         </div>
+
+      {
+
+          vgsList.length===0&&
+
+          <img className="img-container" src={mario} alt=''/>
+
+      }  
       
       <div className="card-list">
         {current?.map((vg) => (
