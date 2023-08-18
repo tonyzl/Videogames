@@ -81,7 +81,7 @@ function Navbar({handleChange, handleSubmit, handleOrder, handleFilteredById}) {
 
         <p>Origen: </p>
         <select onChange={handleFilteredById}>
-          <option value=""></option>
+          <option value="default"></option>
           <option value="API">API</option>
           <option value="BDD">LOCAL</option>
           

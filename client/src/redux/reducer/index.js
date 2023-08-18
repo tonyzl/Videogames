@@ -70,7 +70,7 @@ function rootReducer(state = initialState, action) {
           });
           return {
             ...state,
-            allVgs: copy,
+            allVgs: action.payload==="default"?vgsCopy:copy,
           };  
 
           case FILTERBYORIGIN:
@@ -98,7 +98,7 @@ function rootReducer(state = initialState, action) {
 
             return {
               ...state,
-              allVgs: action.payload==="default"?state.allVgs:filter,
+              allVgs: action.payload==="default"?vgsCopy:filter,
             };  
 
 
@@ -131,7 +131,7 @@ function rootReducer(state = initialState, action) {
             return{
 
               ...state,
-              allVgs:filtergames
+              allVgs:action.payload==="default"?vgsCopy:filtergames
 
             }
 
